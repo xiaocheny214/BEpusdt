@@ -392,8 +392,9 @@ func (Epusdt) Info(ctx *gin.Context) {
 		return
 	}
 
-	order, ok := loadPayOrder(ctx, req.TradeID)
+	order, ok := model.GetTradeOrder(req.TradeID)
 	if !ok {
+		ctx.JSON(200, respFailJson("order not found"))
 		return
 	}
 
